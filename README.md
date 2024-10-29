@@ -7,10 +7,10 @@ head over to [raylib's example directory](https://github.com/raysan5/raylib/tree
 Anything with `"Shaders"` in quotes is not a GPU shader, but just graphical trick done by CPU.
 
 ## Warp Shader
-<video src="_videos/warp.mp4" height="240" controls></video>
+![Warp Shader](_imgs/warp.gif)
 
 ## Camera Glitch Shader (Dead Pixels + Radiation Bands)
-<video src="_videos/camglitch2.mp4" height="240" controls></video>
+![Camera Glitch Shader](_imgs/camglitch2.gif)
 
 ## First Camera Glitch "Shader" (only Dead Pixels)
 ![First Camera Glitch Version](_imgs/camera_glitch.png)
