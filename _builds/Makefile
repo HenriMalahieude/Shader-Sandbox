@@ -1,8 +1,17 @@
 CC = g++
 WARN_FLAGS = -Wall -Wextra -Wno-missing-braces -Wno-missing-field-initializers
-RAYLIB_SRC = C:\Users\there\OneDrive\Documents\Projects\Raylib\raylib\src
+RAYLIB_SRC ?= ../../raylib/src/
 FILE_FLAGS = -I $(RAYLIB_SRC) -L $(RAYLIB_SRC) -lraylib -lopengl32 -lgdi32 -lwinmm
 ALL_FLAGS = $(WARN_FLAGS) $(FILE_FLAGS) -g3 -Og
+
+warp:
+	$(CC) ../warp.cpp -o warp.exe $(ALL_FLAGS)
+
+solar_tex:
+	@$(CC) ../solar.cpp -o solar_tex.exe $(ALL_FLAGS)
+
+basic_lighting:
+	@$(CC) ../basic_lighting.cpp -o basic_lighting.exe $(ALL_FLAGS)
 
 camglitch2:
 	@$(CC) ../camglitch2.cpp -o camglitch2.exe $(ALL_FLAGS)
