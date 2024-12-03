@@ -4,8 +4,11 @@ RAYLIB_SRC ?= ../../raylib/src/
 FILE_FLAGS = -I $(RAYLIB_SRC) -L $(RAYLIB_SRC) -lraylib -lopengl32 -lgdi32 -lwinmm
 ALL_FLAGS = $(WARN_FLAGS) $(FILE_FLAGS) -g3 -Og
 
+warp2:
+	$(CC) ../warp2.cpp -o warp2.exe $(ALL_FLAGS)
+
 warp:
-	$(CC) ../warp.cpp -o warp.exe $(ALL_FLAGS)
+	@$(CC) ../warp.cpp -o warp.exe $(ALL_FLAGS)
 
 solar_tex:
 	@$(CC) ../solar.cpp -o solar_tex.exe $(ALL_FLAGS)
