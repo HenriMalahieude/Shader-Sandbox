@@ -4,6 +4,9 @@ RAYLIB_SRC ?= ../../raylib/src/
 FILE_FLAGS = -I $(RAYLIB_SRC) -L $(RAYLIB_SRC) -lraylib -lopengl32 -lgdi32 -lwinmm
 ALL_FLAGS = $(WARN_FLAGS) $(FILE_FLAGS) -g3 -Og
 
+scan:
+	$(CC) ../scan.cpp -o scan.exe $(ALL_FLAGS)
+
 warp2:
 	$(CC) ../warp2.cpp -o warp2.exe $(ALL_FLAGS)
 

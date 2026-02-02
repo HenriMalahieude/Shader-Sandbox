@@ -42,6 +42,11 @@ int main(void) {
     cam.target = Vector3{0, 0, 0};
     cam.up = Vector3{0, 1, 0};
 
+    Model disc = LoadModel("C:\\Users\\Henri\\Documents\\Random_Programming_Prokects\\project-satellite\\_build\\depot\\resources\\models\\halo\\halo.obj");
+    float discSize = 4.0f;
+    Vector3 discAxis = Vector3{1, 0, 0};
+    float discRotation = 45;
+
     HideCursor();
     DisableCursor();
     while (!WindowShouldClose()) {
@@ -65,6 +70,14 @@ int main(void) {
         warpSize = warpRadius * 0.5f;
         SetShaderValue(warpShader, shd_warpSize, &warpSize, SHADER_UNIFORM_FLOAT);
 
+        Vector3 discRight = Vector3CrossProduct(Vector3{0, 1, 0}, discAxis);
+        Vector3 discTop = Vector3Normalize(Vector3RotateByAxisAngle(discRight, discAxis, discRotation));
+        std::cout << discTop.x << ", " << discTop.y << ", " << discTop.z << '\r';
+        float angToTop = RAD2DEG * Vector3Angle(Vector3Normalize(Vector3Subtract(warpSource, cam.position)), discTop);
+        float alpha = (1 - abs((angToTop - 90.f) / 90.f));
+        float discAlpha = alpha; 
+        //std::cout << angToTop << ' ' << alpha << '\r';
+
         //cout << "Loc (" << warpLocation[0] << ", " << warpLocation[1] << "), Radius: " << sizingT << " or " << sizingR << ", Size: " << warpSize << endl;
 
         BeginTextureMode(texBuffer);
@@ -72,19 +85,29 @@ int main(void) {
 
             BeginMode3D(cam);
                 //DrawPlane(Vector3{0, -5, 0}, Vector2{100, 100}, GRAY);
-                DrawCube(Vector3{5, 5, 6}, 5, 5, 5, RED);
-                DrawCubeWires(Vector3{5, 5, 6}, 5.01, 5.01, 5.01, BLACK);
+                //DrawCube(Vector3{5, 5, 6}, 5, 5, 5, RED);
+                //DrawCubeWires(Vector3{5, 5, 6}, 5.01, 5.01, 5.01, BLACK);
 
                 DrawSphere(Vector3Zero(), 1, GREEN);
                 DrawSphereWires(Vector3Zero(), 1.01, 5, 5, BLACK);
 
                 DrawSphere(Vector3{0, 6, -1}, 1, BROWN);
                 DrawSphereWires(Vector3{0, 6, -1}, 1.01, 7, 7, BLACK);
+
+                DrawModelEx(disc, warpSource, discAxis, discRotation, Vector3{discSize*1.1f, discSize, discSize}, WHITE);
+                //DrawModelEx(disc, warpSource, Vector3{1, 0, 0}, 95, Vector3{discSize*1.05f, discSize*1.05f, discSize*1.05f}, WHITE);
             EndMode3D();
         EndTextureMode();
 
         BeginDrawing();
             ClearBackground(BLACK);
+
+            /*
+            BeginMode3D(cam);
+                //DrawModel(disc, warpSource, discSize, WHITE);
+                DrawModelEx(disc, warpSource, Vector3{1, 0, 0}, 90, Vector3{discSize, discSize, discSize}, WHITE);
+            EndMode3D(); // */
+
 
             BeginShaderMode(warpShader);
                 DrawTextureRec(texBuffer.texture, Rectangle{0, 0, (float)win_x, (float)-win_y}, Vector2{0, 0}, WHITE);
@@ -92,11 +115,19 @@ int main(void) {
 
 
             BeginMode3D(cam);
+                //Color discColor = WHITE;
+                //discColor.a = (unsigned char)(discAlpha * 240);
+                //DrawModelEx(disc, warpSource, discAxis, discRotation, Vector3{discSize, discSize, discSize}, discColor);
+                
                 DrawSphere(warpSource, sourceSize, BLUE);
                 DrawSphereWires(warpSource, sourceSize + 0.05f, 10, 10, DARKBLUE);
-                DrawLine3D(Vector3Zero(), Vector3{10, 0, 0}, RED);
-                DrawLine3D(Vector3Zero(), Vector3{0, 10, 0}, GREEN);
-                DrawLine3D(Vector3Zero(), Vector3{0, 0, 10}, BLUE);
+                //DrawLine3D(Vector3Zero(), Vector3{10, 0, 0}, RED);
+                //DrawLine3D(Vector3Zero(), Vector3{0, 10, 0}, GREEN);
+                //DrawLine3D(Vector3Zero(), Vector3{0, 0, 10}, BLUE);
+                
+                //DrawLine3D(warpSource, Vector3Add(warpSource, Vector3Scale(discTop, 15.0f)), WHITE);
+                //DrawLine3D(warpSource, Vector3Add(warpSource, Vector3Scale(discRight, 15.0f)), RED);
+
             EndMode3D();
 
             //DrawRectangle((int)sopR.x, (int)sopR.y, 2, 2, DARKGREEN);
