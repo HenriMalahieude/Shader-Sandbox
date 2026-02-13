@@ -7,6 +7,8 @@ head over to [raylib's example directory](https://github.com/raysan5/raylib/tree
 Anything with `"Shaders"` in quotes is not a GPU shader, but just graphical trick done by CPU.
 
 ## Warp Shader
+![Accretion Disc](_imgs/accretiondisc.gif)
+
 ![Warp Shader](_imgs/warp.gif)
 
 ## Camera Glitch Shader (Dead Pixels + Radiation Bands)
