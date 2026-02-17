@@ -64,7 +64,7 @@ int main(void) {
     Model realDisk = LoadModel("C:\\Users\\Henri\\Documents\\Random_Programming_Prokects\\project-satellite\\_build\\depot\\resources\\models\\halo\\halo.obj");
     Model fakeDisc = LoadModel("C:\\Users\\Henri\\Documents\\Random_Programming_Prokects\\project-satellite\\_build\\depot\\resources\\models\\halo\\halo.obj");
     fakeDisc.materials[0].shader = posShader;
-    float discSize = 4.0f;
+    float discSize = 4.5f;
     Vector3 discAxis = Vector3{1, 0, 0};
     float discRotation = 0;
 

@@ -7,6 +7,9 @@ ALL_FLAGS = $(WARN_FLAGS) $(FILE_FLAGS) -g3 -Og
 scan:
 	$(CC) ../scan.cpp -o scan.exe $(ALL_FLAGS)
 
+scan2:
+	$(CC) ../scan2.cpp -o scan2.exe $(ALL_FLAGS)
+
 warp2:
 	$(CC) ../warp2.cpp -o warp2.exe $(ALL_FLAGS)
 
